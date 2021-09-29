@@ -1,0 +1,22 @@
+{
+  "name": "crandom",
+  "version": "1.0.0",
+  "description": "A number random generator based on circular equations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alperb/crandom.git"
+  },
+  "keywords": [
+    "random"
+  ],
+  "author": "Alper Berber",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alperb/crandom/issues"
+  },
+  "homepage": "https://github.com/alperb/crandom#readme"
+}
