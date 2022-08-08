@@ -1,12 +1,12 @@
 /**
- * CRandom
+ * crandom
  * Author: Alper Berber <berber@sabanciuniv.edu>
- * Version: 1.0.0
+ * Version: 1.0.1
  */
-class CRandom {
-    constructor(){
-        this.defaultDifficulty = 3; // to the power
-    }
+
+export default class crandom {
+    // default difficulty of the power scale
+    static defaultDifficulty: number = 3;
 
     /**
      * Generates a random number in the given range (inclusive)
@@ -15,18 +15,21 @@ class CRandom {
      * @param {Number} difficulty Difficulty of the random generator, default is 0, increment for harder, decrement for easier (max dec: -2)
      * @returns {Number} number generated in the given range
      */
-    rand(min, max, difficulty = this.defaultDifficulty){
-        let possibilityMap = this.mapPossibilites(min, max, difficulty);
-        let generatedRandom = this.generateRandom(min, max, difficulty);
-        return this.finder(generatedRandom, possibilityMap);
+    static rand(min: number, max: number, difficulty: number = crandom.defaultDifficulty): number {
+        if(min > max) throw new Error('[RANGE_ERROR] Min value cannot be greater than max value.');
+        if(min === undefined || max === undefined) throw new Error('[UNDEFINED_VALUES] Min and max values cannot be undefined.');
+
+        let possibilityMap = crandom.mapPossibilites(min, max, difficulty);
+        let generatedRandom = crandom.generateRandom(min, max, difficulty);
+        return crandom.finder(generatedRandom, possibilityMap) ?? min;
     }
 
     /**
      * Sets the default difficulty
      * @param {Number} diff Difficulty value
      */
-    setDifficulty(diff){
-        this.defaultDifficulty = diff;
+    private static setDifficulty(diff: number){
+        crandom.defaultDifficulty = diff;
     }
 
     /**
@@ -35,7 +38,7 @@ class CRandom {
      * @param {Map} map Map that contains rarity ranges
      * @returns {Number} Random number in the desired range
      */
-    finder(value, map){
+    private static finder(value: number, map: Map<number[], number>): number | undefined {
         for(const key of map.keys()){
             if(value >= key[0] && value <= key[1]) return map.get(key);
         }
@@ -48,8 +51,8 @@ class CRandom {
      * @param {Number} difficulty Difficulty of the random generator
      * @returns {Map} Map of the possibilities
      */
-    mapPossibilites(min, max, difficulty){
-        let map = new Map();
+   private static mapPossibilites(min: number, max: number, difficulty: number): Map<number[], number>{
+        let map = new Map<number[], number>();
 
         let lastStartPoint = Math.pow(min, difficulty);
         for(let i = 0; i <= (max-min); i++){
@@ -73,12 +76,11 @@ class CRandom {
      * @param {Number} min Minimum number
      * @param {Number} max Maximum number
      * @param {Number} difficulty Difficulty of the random generator
-     * @param {Number} bias Bias of the randomizer (not working)
+     * @param {Number} bias Bias of the randomizer (feature)
      * @returns {Number} Randomly generated number in possibility range
      */
-    generateRandom(min, max, difficulty, bias = 0){
-        let randomNumber = (Math.random() * (Math.pow(max, difficulty) - Math.pow(min, difficulty))) + Math.pow(min, difficulty) + 1;
+    private static generateRandom(min: number, max: number, difficulty: number, bias: number = 0): number{
+        const randomNumber = (Math.random() * (Math.pow(max, difficulty) - Math.pow(min, difficulty))) + Math.pow(min, difficulty) + 0.1;
         return Math.floor(randomNumber)
     }
 }
-module.exports = CRandom;
