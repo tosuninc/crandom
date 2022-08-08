@@ -1,10 +1,11 @@
 {
   "name": "crandom",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "A number random generator based on circular equations",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "ts-node src/crandom.ts",
+    "build": "tsc",
     "test": "mocha --require ts-node/register src/test/**/*.test.ts"
   },
   "repository": {
