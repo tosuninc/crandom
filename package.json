@@ -1,8 +1,8 @@
 {
   "name": "crandom",
-  "version": "1.0.3",
-  "description": "A number random generator based on circular equations",
-  "main": "dist/index.js",
+  "version": "1.0.4",
+  "description": "A random number generator based on circular equations",
+  "main": "dist/crandom.js",
   "scripts": {
     "dev": "ts-node src/crandom.ts",
     "build": "tsc",
