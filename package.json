@@ -1,6 +1,6 @@
 {
   "name": "crandom",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A random number generator based on circular equations",
   "main": "dist/crandom.js",
   "scripts": {
