@@ -3,6 +3,8 @@ A simple random number generator based on circular equations.
   
 Difficulty is adjustable by changing the power of the equation.
 
+Since the equation used for generating number ranges is a circular equation, the minimum possible difficulty is -2 (negative 2). 
+
 
 # Usage
 ## Importing
