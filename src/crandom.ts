@@ -12,10 +12,18 @@ export default class crandom {
     static rand(min: number, max: number, difficulty: number = crandom.defaultDifficulty): number {
         if(min > max) throw new Error('[RANGE_ERROR] Min value cannot be greater than max value.');
         if(min === undefined || max === undefined) throw new Error('[UNDEFINED_VALUES] Min and max values cannot be undefined.');
+        
+        let absDifference = 0;
+        if(min < 0 || max < 0) {
+            absDifference = Math.abs(min);
+
+            min += absDifference;
+            max += absDifference;
+        } 
 
         let possibilityMap = crandom.mapPossibilites(min, max, difficulty);
         let generatedRandom = crandom.generateRandom(min, max, difficulty);
-        return crandom.finder(generatedRandom, possibilityMap) ?? min;
+        return (crandom.finder(generatedRandom, possibilityMap) ?? min) -  absDifference;
     }
 
     /**
@@ -75,6 +83,6 @@ export default class crandom {
      */
     private static generateRandom(min: number, max: number, difficulty: number, bias: number = 0): number{
         const randomNumber = (Math.random() * (Math.pow(max, difficulty) - Math.pow(min, difficulty))) + Math.pow(min, difficulty) + 0.1;
-        return Math.floor(randomNumber)
+        return Math.floor(randomNumber);
     }
 }

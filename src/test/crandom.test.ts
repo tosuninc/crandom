@@ -5,12 +5,20 @@ import crandom from '../crandom';
 describe("crandom", () => {
     describe("functionality tests", () => {
         context("WHEN valid values are given", () => {
-            it("SHOULD return a number in between 10-15", () =>{
+            it("SHOULD return a number in between [10, 15]", () =>{
                 expect(crandom.rand(10, 15)).to.be.within(10, 15);
             });
 
-            it("SHOULD return a number in between 1-2", () =>{
+            it("SHOULD return a number in between [1,2]", () =>{
                 expect(crandom.rand(1, 2)).to.be.within(1, 2);
+            });
+
+            it("SHOULD return a number in between [-5, 10]", () =>{
+                expect(crandom.rand(-5, 10)).to.be.within(-5, 10);
+            });
+
+            it("SHOULD return a number in between [-10, -5]", () =>{
+                expect(crandom.rand(-10, -5)).to.be.within(-10, -5);
             });
 
             it("SHOULD return 1", () =>{
